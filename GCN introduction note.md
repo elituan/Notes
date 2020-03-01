@@ -20,4 +20,16 @@ Simplest propagation rule: f(Hⁱ, A) = σ(AHⁱWⁱ). Where
 * Normalizing the feature representation by multiplying adjency matrix A with inverse degree matrix D. In other words the new propagation rule is f(X, A) = D⁻¹AX
 
 ## Spectral Graph convolutions - Thomas Kips
-spetrac propagation rule: 
+spectrac propagation rule: 
+![spectral propagation rule](https://miro.medium.com/max/482/1*mJQRxmEz2XJ1Qgm3wkuaNQ@2x.png)
+
+## Semi-Supervised Classification with GCNs
+We assume that 
+1. we are in a transductive setting. In other words we know all the node but not the node's label
+2. The data is homophily. In other words connected node tend to be similar
+
+What we are doing is training GCN on the labeled nodes. Effectively propagating information of labeled nodes to unlabeled nodes by updating the weight matrices that are share across all nodes. Detail Steps:
+1. Perform foward propagation on GCN
+2. Applyl sigmoid function row-wise on the last layer of GCN
+3. Compute the cross entropy loss on known labeled nodes
+4. Backpropagating the loss and update weight matrices W in each layer.
